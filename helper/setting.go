@@ -1,0 +1,37 @@
+package helper
+
+import (
+	"log"
+	"os"
+	"path/filepath"
+)
+
+func GetHomeDir() string {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return homeDir
+}
+
+func GetFolderPathCLI() string {
+	homeDir := GetHomeDir()
+	return homeDir + "/.cli-git"
+}
+
+func GetFolderPathSHH() string {
+	return filepath.Join(GetHomeDir(), ".ssh")
+}
+
+func GetFolderPathOrg(org string) string {
+	return filepath.Join(GetFolderPathSHH(), org)
+}
+
+func GetFolderPathOrgIdRsa(org string) string {
+	return filepath.Join(GetFolderPathOrg(org), "id_rsa")
+}
+
+func GetFolderPathOrgIdRsaPub(org string) string {
+	return filepath.Join(GetFolderPathOrg(org), "id_rsa.pub")
+}
