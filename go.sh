@@ -3,7 +3,7 @@
 # Variables
 PROJECT_ROOT="."
 
-IMAGE_NAME="cli-git"
+IMAGE_NAME="tig"
 CONTAINER_NAME=$IMAGE_NAME
 DOCKERFILE_PATH=$PROJECT_ROOT
 
@@ -45,11 +45,11 @@ remove_workspace() {
 }
 
 compile_project() {
-  GOOS=linux GOARCH=amd64 go build -buildvcs=false -o tig
+  GOOS=linux GOARCH=amd64 go build -buildvcs=false -o tig-$VERSION
 }
 
 package_project() {
-  tar -czvf tig.tar.gz ./tig
+  tar -czvf tig-$VERSION.tar.gz ./tig-$VERSION
 }
 
 if [ "$1" == "build" ]; then
