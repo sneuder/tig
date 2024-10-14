@@ -20,7 +20,7 @@ func ActionCmdSsh(cCtx *cli.Context) error {
 		log.Fatal("organization not found")
 	}
 
-	createSSHKey(*org)
+	helper.CreateSSHKey(*org)
 	println("organization ssh credentials re-built")
 	// IdRsaPub, _ := filesystem.Read(helper.GetFolderPathOrgIdRsaPub(orgName))
 	// IdRsa, _ := filesystem.Read(helper.GetFolderPathOrgIdRsa(orgName))

@@ -3,7 +3,6 @@ package action
 import (
 	"clit-git/helper"
 	"log"
-	"os/exec"
 	"strings"
 
 	"github.com/urfave/cli/v2"
@@ -20,7 +19,7 @@ func ActionCmdCheckOut(cCtx *cli.Context) error {
 		log.Fatal("organization not found")
 	}
 
-	updateGlobalGitConfig(GlobalGitConfig{
+	helper.UpdateGlobalGitConfig(helper.GlobalGitConfig{
 		Name:  org.Name,
 		Email: org.Email,
 		Org:   org.Org,
@@ -28,16 +27,4 @@ func ActionCmdCheckOut(cCtx *cli.Context) error {
 
 	println("current organization " + org.Name)
 	return nil
-}
-
-type GlobalGitConfig struct {
-	Email string
-	Name  string
-	Org   string
-}
-
-func updateGlobalGitConfig(globalConfig GlobalGitConfig) {
-	exec.Command("git", "config", "--global", "user.name", globalConfig.Name).Run()
-	exec.Command("git", "config", "--global", "user.email", globalConfig.Email).Run()
-	exec.Command("git", "config", "--global", "user.org", globalConfig.Org).Run()
 }
