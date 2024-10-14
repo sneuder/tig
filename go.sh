@@ -45,7 +45,7 @@ remove_workspace() {
 }
 
 compile_project() {
-  GOOS=linux GOARCH=amd64 go build -buildvcs=false -o tig-git
+  GOOS=linux GOARCH=amd64 go build -buildvcs=false -o tig
 }
 
 packe_project() {
