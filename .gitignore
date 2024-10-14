@@ -10,6 +10,8 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+tig
+tig.tar.gz
 
 # Dependency directories (remove the comment below to include it)
 # vendor/

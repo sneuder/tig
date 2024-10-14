@@ -48,8 +48,8 @@ compile_project() {
   GOOS=linux GOARCH=amd64 go build -buildvcs=false -o tig
 }
 
-packe_project() {
-  tar -czvf tig-cli.tar.gz ./tig-cli
+package_project() {
+  tar -czvf tig.tar.gz ./tig
 }
 
 if [ "$1" == "build" ]; then
@@ -62,8 +62,8 @@ elif [ "$1" == "stop" ]; then
   stop_container
 elif [ "$1" == "compile" ]; then
   compile_project
-elif [ "$1" == "packge" ]; then
-  packe_project
+elif [ "$1" == "package" ]; then
+  package_project
 else
   echo "Usage [command]"
 fi

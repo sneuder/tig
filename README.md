@@ -4,15 +4,30 @@ This CLI tool simplifies managing Git configurations across multiple repositorie
 
 ## Steps for installation
 
+**0. Install dependencies**
+```
+sudo apt install openssh-client
+sudo apt install git
+```
+
 **1. Download the executable file**
 ```
 wget https://github.com/tig.tar.gz
 ```
 
-
 **2. Unpack the downloaded file**
 ```
 tar -xzf tig.tar.gz
+```
+
+**3. Move the directory**
+```
+sudo mv ./tig /usr/local/bin/tig
+```
+
+**4. Verify the move**
+```
+which tig
 ```
 
 ## Commands
