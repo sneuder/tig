@@ -10,7 +10,7 @@ func GetCmdSsh() *cli.Command {
 	return &cli.Command{
 		Name:    "ssh",
 		Aliases: []string{"s"},
-		Usage:   "organziation's private and public ssh keys",
+		Usage:   "re-build organziation's private and public ssh keys",
 		Action:  action.ActionCmdSsh,
 	}
 }

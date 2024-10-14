@@ -10,7 +10,7 @@ func GetCmdCheckOut() *cli.Command {
 	return &cli.Command{
 		Name:    "checkout",
 		Aliases: []string{"c"},
-		Usage:   "remove organization",
+		Usage:   "checkout organization",
 		Action:  action.ActionCmdCheckOut,
 	}
 }

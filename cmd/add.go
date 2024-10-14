@@ -27,7 +27,7 @@ func getFlagsCmdAdd() []cli.Flag {
 		&cli.StringFlag{
 			Name:    constant.CmdAddFlags.Email,
 			Aliases: []string{"e"},
-			Usage:   "user name",
+			Usage:   "email",
 		},
 		&cli.StringFlag{
 			Name:     constant.CmdAddFlags.Name,

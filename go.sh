@@ -45,7 +45,11 @@ remove_workspace() {
 }
 
 compile_project() {
-  GOOS=linux GOARCH=amd64 go build -o cli-git
+  GOOS=linux GOARCH=amd64 go build -buildvcs=false -o tig-git
+}
+
+packe_project() {
+  tar -czvf tig-cli.tar.gz ./tig-cli
 }
 
 if [ "$1" == "build" ]; then
@@ -58,6 +62,8 @@ elif [ "$1" == "stop" ]; then
   stop_container
 elif [ "$1" == "compile" ]; then
   compile_project
+elif [ "$1" == "packge" ]; then
+  packe_project
 else
   echo "Usage [command]"
 fi
