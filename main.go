@@ -14,6 +14,7 @@ func main() {
 
 	app := &cli.App{
 		Commands: getCommands(),
+		Version:  os.Getenv("VERSION"),
 	}
 
 	if err := app.Run(os.Args); err != nil {

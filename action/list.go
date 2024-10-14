@@ -1,6 +1,7 @@
 package action
 
 import (
+	"clit-git/constant"
 	"clit-git/helper"
 	"os"
 
@@ -9,6 +10,16 @@ import (
 )
 
 func ActionCmdList(cCtx *cli.Context) error {
+	if cCtx.Bool("platform") {
+		actionCmdListPlatforms()
+		return nil
+	}
+
+	actionCmdListOrg()
+	return nil
+}
+
+func actionCmdListOrg() error {
 	orgs := helper.GetOrgs()
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"Organization", "Name", "Email", "Platform"})
@@ -18,5 +29,13 @@ func ActionCmdList(cCtx *cli.Context) error {
 	}
 
 	table.Render()
+	return nil
+}
+
+func actionCmdListPlatforms() error {
+	for platform := range constant.PlatFormOptions {
+		println(platform)
+	}
+
 	return nil
 }
