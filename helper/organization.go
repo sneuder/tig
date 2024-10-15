@@ -59,16 +59,16 @@ func FindOrgByName(orgName string) (*schema.Organization, int) {
 }
 
 func BuildOrganizationData(cCtx *cli.Context) schema.Organization {
-	platform, platFormExists := GetPlatform(cCtx.String(constant.CmdAddFlags.Platform))
+	platform, platFormExists := GetPlatform(cCtx.String(constant.Platform))
 
 	if !platFormExists {
 		log.Fatal("the platform does not exists")
 	}
 
 	return schema.Organization{
-		Org:      cCtx.String(constant.CmdAddFlags.Org),
-		Name:     cCtx.String(constant.CmdAddFlags.Name),
-		Email:    cCtx.String(constant.CmdAddFlags.Email),
+		Org:      cCtx.String(constant.Org),
+		Name:     cCtx.String(constant.Name),
+		Email:    cCtx.String(constant.Email),
 		Platform: platform,
 	}
 }

@@ -20,23 +20,23 @@ func GetCmdAdd() *cli.Command {
 func getFlagsCmdAdd() []cli.Flag {
 	return []cli.Flag{
 		&cli.StringFlag{
-			Name:    constant.CmdAddFlags.Org,
+			Name:    constant.Org,
 			Aliases: []string{"o"},
 			Usage:   "organization name",
 		},
 		&cli.StringFlag{
-			Name:    constant.CmdAddFlags.Email,
+			Name:    constant.Email,
 			Aliases: []string{"e"},
 			Usage:   "email",
 		},
 		&cli.StringFlag{
-			Name:     constant.CmdAddFlags.Name,
+			Name:     constant.Name,
 			Aliases:  []string{"n"},
 			Usage:    "user name",
 			Required: true,
 		},
 		&cli.StringFlag{
-			Name:     constant.CmdAddFlags.Platform,
+			Name:     constant.Platform,
 			Aliases:  []string{"p"},
 			Usage:    "repository platform",
 			Required: true,

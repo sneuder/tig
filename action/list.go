@@ -10,7 +10,7 @@ import (
 )
 
 func ActionCmdList(cCtx *cli.Context) error {
-	if cCtx.Bool("platform") {
+	if cCtx.Bool(constant.Platform) {
 		actionCmdListPlatforms()
 		return nil
 	}
