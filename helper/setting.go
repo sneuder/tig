@@ -17,7 +17,7 @@ func GetHomeDir() string {
 
 func GetFolderPathCLI() string {
 	homeDir := GetHomeDir()
-	return homeDir + "/.cli-git"
+	return homeDir + "/.cli-git" // TODO: change to tig-org
 }
 
 func GetFolderPathSHH() string {

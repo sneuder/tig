@@ -25,6 +25,6 @@ func ActionCmdCheckOut(cCtx *cli.Context) error {
 		Org:   org.Org,
 	})
 
-	println("current organization " + org.Name)
+	println("current organization " + org.Org)
 	return nil
 }
