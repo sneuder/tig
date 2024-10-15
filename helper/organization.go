@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"github.com/sneuder/filesystem"
-	"github.com/urfave/cli/v2"
 )
 
 const (
@@ -56,21 +55,6 @@ func FindOrgByName(orgName string) (*schema.Organization, int) {
 	}
 
 	return nil, -1
-}
-
-func BuildOrganizationData(cCtx *cli.Context) schema.Organization {
-	platform, platFormExists := GetPlatform(cCtx.String(constant.Platform))
-
-	if !platFormExists {
-		log.Fatal("the platform does not exists")
-	}
-
-	return schema.Organization{
-		Org:      cCtx.String(constant.Org),
-		Name:     cCtx.String(constant.Name),
-		Email:    cCtx.String(constant.Email),
-		Platform: platform,
-	}
 }
 
 func SaveOrganization(organization schema.Organization) {

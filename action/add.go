@@ -1,7 +1,10 @@
 package action
 
 import (
+	"clit-git/constant"
 	"clit-git/helper"
+	"clit-git/schema"
+	"log"
 
 	"github.com/urfave/cli/v2"
 )
@@ -11,7 +14,7 @@ const (
 )
 
 func ActionCmdAdd(cCtx *cli.Context) error {
-	organization := helper.BuildOrganizationData(cCtx)
+	organization := buildOrganizationData(cCtx)
 	helper.SaveOrganization(organization)
 	helper.SaveOrganizationInConfig()
 
@@ -23,4 +26,21 @@ func ActionCmdAdd(cCtx *cli.Context) error {
 	})
 
 	return nil
+}
+
+//
+
+func buildOrganizationData(cCtx *cli.Context) schema.Organization {
+	platform, platFormExists := helper.GetPlatform(cCtx.String(constant.Platform))
+
+	if !platFormExists {
+		log.Fatal("the platform does not exists")
+	}
+
+	return schema.Organization{
+		Org:      cCtx.String(constant.Org),
+		Name:     cCtx.String(constant.Name),
+		Email:    cCtx.String(constant.Email),
+		Platform: platform,
+	}
 }
