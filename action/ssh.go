@@ -3,11 +3,12 @@ package action
 import (
 	"clit-git/helper"
 	"log"
+	"os/exec"
 
 	"github.com/urfave/cli/v2"
 )
 
-func ActionCmdSsh(cCtx *cli.Context) error {
+func ActionCmdSshBuild(cCtx *cli.Context) error {
 	orgName := cCtx.Args().Get(0)
 
 	if orgName == "" {
@@ -22,14 +23,30 @@ func ActionCmdSsh(cCtx *cli.Context) error {
 
 	helper.CreateSSHKey(*org)
 	println("organization ssh credentials re-built")
-	// IdRsaPub, _ := filesystem.Read(helper.GetFolderPathOrgIdRsaPub(orgName))
-	// IdRsa, _ := filesystem.Read(helper.GetFolderPathOrgIdRsa(orgName))
 
-	// println("Public key")
-	// println(IdRsaPub)
+	return nil
+}
 
-	// println("\nPrivate key")
-	// println(IdRsa)
+func ActionCmdSshAdd(cCtx *cli.Context) error {
+	orgName := cCtx.Args().Get(0)
 
+	if orgName == "" {
+		log.Fatal("provide an organization name")
+	}
+
+	org, _ := helper.FindOrgByName(orgName)
+
+	if org == nil {
+		log.Fatal("organization not found")
+	}
+
+	fullPathFolderOrgIdRsa := helper.GetFolderPathOrgIdRsa(org.Org)
+	err := exec.Command("ssh-add", fullPathFolderOrgIdRsa).Run()
+
+	if err != nil {
+		log.Fatal("could not add ssh public key for " + org.Org + " organization")
+	}
+
+	println("ssh public key added")
 	return nil
 }
