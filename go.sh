@@ -4,6 +4,7 @@
 PROJECT_ROOT="."
 
 IMAGE_NAME="tig"
+CLI_NAME="tig"
 CONTAINER_NAME=$IMAGE_NAME
 DOCKERFILE_PATH=$PROJECT_ROOT
 
@@ -49,7 +50,9 @@ compile_project() {
 }
 
 package_project() {
-  tar -czvf tig-$VERSION.tar.gz ./tig-$VERSION
+  compile_project
+  tar -czvf tig-$VERSION.tar.gz ./$CLI_NAME
+  rm ./$CLI_NAME
 }
 
 if [ "$1" == "build" ]; then

@@ -12,12 +12,12 @@ sudo apt install git
 
 **1. Download the executable file**
 ```
-wget https://github.com/tig.tar.gz
+wget https://github.com/tig-<version>.tar.gz
 ```
 
 **2. Unpack the downloaded file**
 ```
-tar -xzf tig.tar.gz
+tar -xzf tig-<version>.tar.gz
 ```
 
 **3. Move the directory**
@@ -44,17 +44,17 @@ tig ls
 
 - Checkout tig organization
 ```
-tig checkout <organization name>
+tig checkout <organization_name>
 ```
 
 - Remove tig organization
 ```
-tig remove <organization name>
+tig remove <organization_name>
 ```
 
 - Rebuild tig organization's credentials
 ```
-tig ssh <organization name>
+tig ssh <organization_name>
 ```
 
 - Help
