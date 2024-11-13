@@ -12,7 +12,7 @@ sudo apt install git
 
 **1. Download the executable file**
 ```
-wget https://github.com/tig-<version>.tar.gz
+wget https://github.com/sneuder/tig/releases/download/v<version>/tig-<version>.tar.gz
 ```
 
 **2. Unpack the downloaded file**
