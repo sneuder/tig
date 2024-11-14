@@ -23,7 +23,6 @@ func getFlagsCmdList() []cli.Flag {
 			Name:    constant.Platform,
 			Aliases: []string{"p"},
 			Usage:   "shows up the available platforms",
-			Value:   true,
 		},
 	}
 }
