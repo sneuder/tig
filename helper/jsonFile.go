@@ -51,3 +51,7 @@ func CheckJSONFile(filename string, path string) bool {
 
 	return true
 }
+
+func AddExtension(fileName string) string {
+	return fileName + ".json"
+}

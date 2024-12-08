@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"clit-git/constant"
 	"log"
 	"os"
 	"path/filepath"
@@ -34,4 +35,8 @@ func GetFolderPathOrgIdRsa(org string) string {
 
 func GetFolderPathOrgIdRsaPub(org string) string {
 	return filepath.Join(GetFolderPathOrg(org), "id_rsa.pub")
+}
+
+func GetOrgFilepath() string {
+	return filepath.Join(GetFolderPathCLI(), AddExtension(constant.ORG_FILE_NAME))
 }

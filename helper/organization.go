@@ -11,17 +11,13 @@ import (
 	"github.com/sneuder/filesystem"
 )
 
-const (
-	ORG_FILE_NAME = "organization"
-)
-
 func GetOrgs() []schema.Organization {
 	jsonFilePath := GetFolderPathCLI()
-	jsonFileExists := CheckJSONFile(ORG_FILE_NAME, jsonFilePath)
+	jsonFileExists := CheckJSONFile(constant.ORG_FILE_NAME, jsonFilePath)
 
 	var organizations = []schema.Organization{}
 	if jsonFileExists {
-		organizationsData, _ := ReadJSONFile(ORG_FILE_NAME, jsonFilePath)
+		organizationsData, _ := ReadJSONFile(constant.ORG_FILE_NAME, jsonFilePath)
 		if err := json.Unmarshal(organizationsData, &organizations); err != nil {
 			log.Fatal(err)
 		}
@@ -32,7 +28,7 @@ func GetOrgs() []schema.Organization {
 
 func CreateOrgFile(organizations []schema.Organization) {
 	jsonFilePath := GetFolderPathCLI()
-	CreateJSONFile(organizations, ORG_FILE_NAME, jsonFilePath)
+	CreateJSONFile(organizations, constant.ORG_FILE_NAME, jsonFilePath)
 }
 
 func RemoveOrgFolder(orgName string) {

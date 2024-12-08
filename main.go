@@ -29,5 +29,6 @@ func getCommands() []*cli.Command {
 		cmd.GetCmdRemove(),
 		cmd.GetCmdList(),
 		cmd.GetCmdSsh(),
+		cmd.GetCmdExport(),
 	}
 }
