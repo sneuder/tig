@@ -57,6 +57,16 @@ tig remove <organization_name>
 tig ssh <organization_name>
 ```
 
+- Export tig organization's in json file
+```
+tig export
+```
+
+- Build tig organization from json file
+```
+tig build
+```
+
 - Help
 ```
 tig help
