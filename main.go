@@ -30,5 +30,6 @@ func getCommands() []*cli.Command {
 		cmd.GetCmdList(),
 		cmd.GetCmdSsh(),
 		cmd.GetCmdExport(),
+		cmd.GetCmdBuild(),
 	}
 }

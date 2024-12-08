@@ -30,8 +30,12 @@ func CreateJSONFile(data interface{}, filename string, path string) error {
 	return nil
 }
 
-func ReadJSONFile(filename string, path string) ([]byte, error) {
-	fullPathFile := filepath.Join(path, filename+".json")
+func AddExtension(fileName string) string {
+	return fileName + ".json"
+}
+
+func ReadJSONFile(fileName string, path string) ([]byte, error) {
+	fullPathFile := filepath.Join(path, AddExtension(fileName))
 	data, err := os.ReadFile(fullPathFile)
 	if err != nil {
 		return nil, fmt.Errorf("error opening file: %w", err)
@@ -40,8 +44,22 @@ func ReadJSONFile(filename string, path string) ([]byte, error) {
 	return data, nil
 }
 
+func RemoveJSONFile(fileName string, path string) bool {
+	removed := true
+
+	fullPathFile := filepath.Join(path, AddExtension(fileName))
+	exists := CheckJSONFile(fileName, path)
+
+	if exists {
+		err := os.Remove(fullPathFile)
+		removed = err != nil
+	}
+
+	return removed
+}
+
 func CheckJSONFile(filename string, path string) bool {
-	fullPathFile := filepath.Join(path, filename+".json")
+	fullPathFile := filepath.Join(path, AddExtension(filename))
 	if _, err := os.Stat(fullPathFile); err != nil {
 		if os.IsNotExist(err) {
 			return false
@@ -50,8 +68,4 @@ func CheckJSONFile(filename string, path string) bool {
 	}
 
 	return true
-}
-
-func AddExtension(fileName string) string {
-	return fileName + ".json"
 }

@@ -9,12 +9,15 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-const (
-	ORG_FILE_NAME = "organization"
-)
-
 func ActionCmdAdd(cCtx *cli.Context) error {
 	organization := buildOrganizationData(cCtx)
+	buildOrganization(organization)
+	return nil
+}
+
+//
+
+func buildOrganization(organization schema.Organization) {
 	helper.SaveOrganization(organization)
 	helper.SaveOrganizationInConfig()
 
@@ -24,11 +27,7 @@ func ActionCmdAdd(cCtx *cli.Context) error {
 		Email: organization.Email,
 		Org:   organization.Org,
 	})
-
-	return nil
 }
-
-//
 
 func buildOrganizationData(cCtx *cli.Context) schema.Organization {
 	platform, platFormExists := helper.GetPlatform(cCtx.String(constant.Platform))
