@@ -12,22 +12,17 @@ sudo apt install git
 
 **1. Download the executable file**
 ```
-wget https://github.com/sneuder/tig/releases/download/v<version>/tig-<version>.tar.gz
+wget https://github.com/sneuder/tig/releases/download/v2.0.0/install.sh
 ```
 
-**2. Unpack the downloaded file**
+**2. Make the Script Executable**
 ```
-tar -xzf tig-<version>.tar.gz
-```
-
-**3. Move the directory**
-```
-sudo mv ./tig /usr/local/bin/tig
+sudo chmod +x install.sh
 ```
 
-**4. Verify the move**
+**3. Run the Script**
 ```
-which tig
+sudo ./install.sh
 ```
 
 ## Commands
