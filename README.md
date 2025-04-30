@@ -47,9 +47,16 @@ tig checkout <organization_name>
 tig remove <organization_name>
 ```
 
-- Rebuild tig organization's credentials
+- Add ssh credentials to the ssh list
+> If a name is not provide, it is going to use your current organization
 ```
-tig ssh <organization_name>
+tig ssh add <organization_name>
+```
+
+- Rebuild tig organization's credentials
+> If a name is not provide, it is going to your current organization
+```
+tig ssh build <organization_name>
 ```
 
 - Export tig organization's in json file
