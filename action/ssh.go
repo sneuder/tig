@@ -24,7 +24,7 @@ func ActionCmdSshBuild(cCtx *cli.Context) error {
 	}
 
 	helper.CreateSSHKey(*org)
-	println("organization ssh credentials re-built")
+	println("organization ssh credentials re-built for " + org.Org + " organization")
 
 	return nil
 }
@@ -51,6 +51,6 @@ func ActionCmdSshAdd(cCtx *cli.Context) error {
 		log.Fatal("could not add ssh public key for " + org.Org + " organization")
 	}
 
-	println("ssh public key added")
+	println("ssh public key added for " + org.Org + " organization")
 	return nil
 }
