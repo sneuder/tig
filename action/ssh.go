@@ -2,6 +2,7 @@ package action
 
 import (
 	"clit-git/helper"
+	"clit-git/schema"
 	"log"
 	"os/exec"
 
@@ -10,12 +11,13 @@ import (
 
 func ActionCmdSshBuild(cCtx *cli.Context) error {
 	orgName := cCtx.Args().Get(0)
+	var org *schema.Organization
 
 	if orgName == "" {
-		log.Fatal("provide an organization name")
+		org, _ = helper.GetCurrentOrg()
+	} else {
+		org, _ = helper.FindOrgByName(orgName)
 	}
-
-	org, _ := helper.FindOrgByName(orgName)
 
 	if org == nil {
 		log.Fatal("organization not found")
@@ -30,11 +32,13 @@ func ActionCmdSshBuild(cCtx *cli.Context) error {
 func ActionCmdSshAdd(cCtx *cli.Context) error {
 	orgName := cCtx.Args().Get(0)
 
-	if orgName == "" {
-		log.Fatal("provide an organization name")
-	}
+	var org *schema.Organization
 
-	org, _ := helper.FindOrgByName(orgName)
+	if orgName == "" {
+		org, _ = helper.GetCurrentOrg()
+	} else {
+		org, _ = helper.FindOrgByName(orgName)
+	}
 
 	if org == nil {
 		log.Fatal("organization not found")
