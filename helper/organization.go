@@ -102,8 +102,9 @@ func RemoveOrgByName(orgName string) {
 	CreateOrgFile(orgs)
 }
 
-func GetCurrentOrg() string {
+func GetCurrentOrg() (*schema.Organization, int) {
 	cmd := exec.Command("bash", "-c", "git config --global --list | grep 'user.org' | cut -d '=' -f 2")
 	out, _ := cmd.Output()
-	return strings.TrimSpace(string(out))
+	orgName := strings.TrimSpace(string(out))
+	return FindOrgByName(orgName)
 }

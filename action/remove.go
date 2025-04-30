@@ -16,12 +16,16 @@ func ActionCmdRemove(cCtx *cli.Context) error {
 	}
 
 	helper.RemoveOrgByName(orgName)
-
 	helper.SaveOrganizationInConfig()
-	currentOrgName := helper.GetCurrentOrg()
-	helper.RemoveOrgFolder(currentOrgName)
+	org, orgId := helper.GetCurrentOrg()
 
-	if orgName == currentOrgName {
+	if orgId == -1 {
+		println("current organization not found")
+	}
+
+	helper.RemoveOrgFolder(org.Org)
+
+	if orgName == org.Org {
 		helper.UpdateGlobalGitConfig(helper.GlobalGitConfig{
 			Name:  "",
 			Email: "",

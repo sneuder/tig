@@ -2,6 +2,7 @@ package action
 
 import (
 	"clit-git/helper"
+	"clit-git/schema"
 	"log"
 	"strings"
 
@@ -10,12 +11,16 @@ import (
 
 func ActionCmdCheckOut(cCtx *cli.Context) error {
 	orgName := strings.TrimSpace(cCtx.Args().Get(0))
+	var org *schema.Organization
+	var orgId int
+
 	if orgName == "" {
-		log.Fatal("please provide an organization name")
+		org, orgId = helper.GetCurrentOrg()
+	} else {
+		org, orgId = helper.FindOrgByName(orgName)
 	}
 
-	org, _ := helper.FindOrgByName(orgName)
-	if org == nil {
+	if org == nil || orgId == -1 {
 		log.Fatal("organization not found")
 	}
 
