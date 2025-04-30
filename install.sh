@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=2.0.0
+VERSION=3.0.0
 
 wget "https://github.com/sneuder/tig/releases/download/v$VERSION/wkspace-$VERSION.tar.gz" -O "tig-$VERSION.tar.gz"
 
