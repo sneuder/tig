@@ -54,7 +54,7 @@ tig ssh add <organization_name>
 ```
 
 - Rebuild tig organization's credentials
-> If a name is not provide, it is going to your current organization
+> If a name is not provide, it is going to use your current organization
 ```
 tig ssh build <organization_name>
 ```
