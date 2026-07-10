@@ -46,7 +46,14 @@ remove_workspace() {
 }
 
 compile_project() {
-  GOOS=linux GOARCH=amd64 go build -buildvcs=false -o tig
+  # Linux
+  GOOS=linux GOARCH=amd64 go build -buildvcs=false -o tig-linux-amd64
+
+  # macOS Intel
+  GOOS=darwin GOARCH=amd64 go build -buildvcs=false -o tig-darwin-amd64
+
+  # macOS Apple Silicon (M1/M2/M3)
+  GOOS=darwin GOARCH=arm64 go build -buildvcs=false -o tig-darwin-arm64
 }
 
 package_project() {
