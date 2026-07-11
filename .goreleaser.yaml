@@ -50,9 +50,20 @@ changelog:
       - "^docs:"
       - "^test:"
 
+brews:
+  - name: tig
+    homepage: "https://github.com/nirmta/tig"
+    description: "This CLI tool organizes Git configs by 'users,' enabling seamless switching of SSH credentials and repo settings for multi-project workflows."
+    license: "MIT"
+
+    tap:
+      owner: nirmta
+      name: homebrew-tig
+
+    folder: Formula
+
 release:
   footer: >-
 
     ---
-
-    Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
+    nirmta inc.
