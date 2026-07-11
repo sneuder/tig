@@ -16,7 +16,8 @@ before:
     - go generate ./...
 
 builds:
-  - main: ./...
+  - main: ./main.go
+    binary: tig
     env:
       - CGO_ENABLED=0
     goos:
@@ -53,14 +54,12 @@ changelog:
 brews:
   - name: tig
     homepage: "https://github.com/nirmta/tig"
-    description: "This CLI tool organizes Git configs by 'users,' enabling seamless switching of SSH credentials and repo settings for multi-project workflows."
+    description: "Your CLI tool"
     license: "MIT"
 
-    tap:
+    repository:
       owner: nirmta
       name: homebrew-tig
-
-    folder: Formula
 
 release:
   footer: >-
