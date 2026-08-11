@@ -1,28 +1,26 @@
-package cli
+package cmds
 
 import (
-	"fmt"
 	usecases "tig/application/use-cases"
-	"tig/representation/mappers"
 	"tig/representation/services"
 
 	"github.com/urfave/cli/v2"
 )
 
-type ListDataCli struct {
+type ListDataCmd struct {
 	getRepositoryHostsUseCase *usecases.GetRepositoryHostsUseCase
 	getUsersUseCase           *usecases.GetUsersUseCase
 	getUserGitConfigUseCase   *usecases.GetUserGitConfigUseCase
 	printService              *services.PrintService
 }
 
-func NewListDataCli(
+func NewListUsersCmd(
 	getRepositoryHostsUseCase *usecases.GetRepositoryHostsUseCase,
 	getUsersUseCase *usecases.GetUsersUseCase,
 	getUserGitConfigUseCase *usecases.GetUserGitConfigUseCase,
 	printService *services.PrintService,
-) *ListDataCli {
-	return &ListDataCli{
+) *ListDataCmd {
+	return &ListDataCmd{
 		getRepositoryHostsUseCase: getRepositoryHostsUseCase,
 		getUsersUseCase:           getUsersUseCase,
 		printService:              printService,
@@ -30,7 +28,7 @@ func NewListDataCli(
 	}
 }
 
-func (ld *ListDataCli) BuildSetting() *cli.Command {
+func (ld *ListDataCmd) BuildSetting() *cli.Command {
 	return &cli.Command{
 		Name:    "list",
 		Aliases: []string{"ls"},
@@ -40,47 +38,11 @@ func (ld *ListDataCli) BuildSetting() *cli.Command {
 	}
 }
 
-func (ld *ListDataCli) BuildFlags() []cli.Flag {
-	return []cli.Flag{
-		&cli.BoolFlag{
-			Name:    mappers.Host,
-			Aliases: []string{"r"},
-			Usage:   "list repository hosts",
-		},
-		&cli.StringFlag{
-			Name:    mappers.PublicKey,
-			Aliases: []string{"p"},
-			Usage:   "list public key from a user",
-		},
-	}
+func (ld *ListDataCmd) BuildFlags() []cli.Flag {
+	return []cli.Flag{}
 }
 
-func (ld *ListDataCli) BuildAction(cCtx *cli.Context) error {
-	listRepositoryHosts := cCtx.Bool(mappers.Host)
-	publicKeyUserAlias := cCtx.String(mappers.PublicKey)
-
-	if listRepositoryHosts {
-		table := [][]string{
-			{"Repository Host", "Usage Key"},
-		}
-
-		repositoryHosts := ld.getRepositoryHostsUseCase.Execute()
-
-		for key, repositoryHost := range repositoryHosts {
-			table = append(table, []string{repositoryHost, key})
-		}
-
-		ld.printService.RenderTable(table)
-
-		return nil
-	}
-
-	if publicKeyUserAlias != "" {
-		gitConfig, _ := ld.getUserGitConfigUseCase.Execute(publicKeyUserAlias)
-		fmt.Println(gitConfig.PublicKey)
-		return nil
-	}
-
+func (ld *ListDataCmd) BuildAction(cCtx *cli.Context) error {
 	users := ld.getUsersUseCase.Execute()
 
 	table := [][]string{

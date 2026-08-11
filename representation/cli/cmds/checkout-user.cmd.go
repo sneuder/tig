@@ -1,23 +1,23 @@
-package cli
+package cmds
 
 import (
 	usecases "tig/application/use-cases"
-	"tig/representation/mappers"
+	"tig/representation/cli/flags"
 
 	"github.com/urfave/cli/v2"
 )
 
-type CheckoutUserCli struct {
+type CheckoutUserCmd struct {
 	checkoutUserUseCase *usecases.CheckoutUserUseCase
 }
 
-func NewCheckoutUserCli(checkoutUserUseCase *usecases.CheckoutUserUseCase) *CheckoutUserCli {
-	return &CheckoutUserCli{
+func NewCheckoutUserCmd(checkoutUserUseCase *usecases.CheckoutUserUseCase) *CheckoutUserCmd {
+	return &CheckoutUserCmd{
 		checkoutUserUseCase: checkoutUserUseCase,
 	}
 }
 
-func (co *CheckoutUserCli) BuildSetting() *cli.Command {
+func (co *CheckoutUserCmd) BuildSetting() *cli.Command {
 	return &cli.Command{
 		Name:    "checkout",
 		Aliases: []string{"c"},
@@ -27,10 +27,10 @@ func (co *CheckoutUserCli) BuildSetting() *cli.Command {
 	}
 }
 
-func (co *CheckoutUserCli) BuildFlags() []cli.Flag {
+func (co *CheckoutUserCmd) BuildFlags() []cli.Flag {
 	return []cli.Flag{
 		&cli.StringFlag{
-			Name:     mappers.Alias,
+			Name:     flags.UserAlias,
 			Aliases:  []string{"a"},
 			Usage:    "alias name",
 			Required: true,
@@ -38,8 +38,8 @@ func (co *CheckoutUserCli) BuildFlags() []cli.Flag {
 	}
 }
 
-func (co *CheckoutUserCli) BuildAction(cCtx *cli.Context) error {
-	userAlias := cCtx.String(mappers.Alias)
+func (co *CheckoutUserCmd) BuildAction(cCtx *cli.Context) error {
+	userAlias := cCtx.String(flags.UserAlias)
 	co.checkoutUserUseCase.Execute(userAlias)
 	return nil
 }

@@ -6,7 +6,8 @@ import (
 	"tig/infrastructure/consts"
 	"tig/infrastructure/persistence/repositories"
 	infrastructureServices "tig/infrastructure/services"
-	cli "tig/representation/cli"
+	"tig/representation/cli/cmds"
+	"tig/representation/cli/settings"
 	"tig/representation/schemas"
 	representationServices "tig/representation/services"
 
@@ -31,19 +32,18 @@ func main() {
 
 	printService := representationServices.NewPrintService()
 
-	var addUserCli schemas.CLISchema = cli.NewAddUserCli(addNewUserUseCase)
-	var removeUserCli schemas.CLISchema = cli.NewRemoveUserCli(removeUserUseCase)
-	var listDataCli schemas.CLISchema = cli.NewListDataCli(getRepositoryHostsUseCase, newGetUsersUseCase, getUserGitConfigUseCase, printService)
-	var checkoutUserCli schemas.CLISchema = cli.NewCheckoutUserCli(checkoutUserUseCase)
+	var addUserCmd schemas.CmdSchema = cmds.NewAddUserCmd(addNewUserUseCase)
+	var removeUserCmd schemas.CmdSchema = cmds.NewRemoveUserCmd(removeUserUseCase)
+	var listUserCmd schemas.CmdSchema = cmds.NewListUsersCmd(getRepositoryHostsUseCase, newGetUsersUseCase, getUserGitConfigUseCase, printService)
+	var checkoutUserCmd schemas.CmdSchema = cmds.NewCheckoutUserCmd(checkoutUserUseCase)
+
+	commands := settings.BuildCLI(settings.CmdCollections{
+		User: []schemas.CmdSchema{addUserCmd, removeUserCmd, listUserCmd, checkoutUserCmd},
+	})
 
 	app := &urfave.App{
-		Commands: []*urfave.Command{
-			addUserCli.BuildSetting(),
-			removeUserCli.BuildSetting(),
-			listDataCli.BuildSetting(),
-			checkoutUserCli.BuildSetting(),
-		},
-		Version: os.Getenv("VERSION"),
+		Commands: commands,
+		Version:  os.Getenv("VERSION"),
 	}
 
 	app.Run(os.Args)
